@@ -1,0 +1,18 @@
+[
+    {
+        "path": "../Voca.mp4",
+        "caption": "Voca"
+    },
+    {
+        "path": "../audio2face.mp4",
+        "caption": "Audio2Face",
+        "crop": [316, 0, 730, 640],
+        "zoom": 1.6,
+        "subclip": [5.05, 10],
+        "mute": true
+    },
+    {
+        "path": "../ours.mp4",
+        "caption": "Ours"
+    }
+]
