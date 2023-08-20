@@ -1,0 +1,22 @@
+{
+    "function": "makeColView",
+    "argument": [
+        {
+            "function": "readVideoFile",
+            "argument": "../sample2.mp4",
+            "adjust": {
+                "crop": [ 316, 0, 760, 640 ],
+                "zoom": 1.6,
+                "subclip": [ 5.05, 10 ],
+                "mute": true
+            }
+        },
+        {
+            "function": "readVideoFile",
+            "argument": "../sample.mp4",
+            "adjust": {
+                "caption": "sample2.mp4"
+            }
+        }
+    ]
+}

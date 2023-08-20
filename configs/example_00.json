@@ -1,0 +1,25 @@
+{
+    "function": "makeGridView",
+    "argument": [
+        [
+            {
+                "function": "readVideoFile",
+                "argument": "../sample.mp4"
+            },
+            {
+                "function": "readVideoFile",
+                "argument": "../sample.mp4"
+            }
+        ],
+        [
+            {
+                "function": "readVideoFile",
+                "argument": "../sample.mp4"
+            },
+            {
+                "function": "readVideoFile",
+                "argument": "../sample.mp4"
+            }
+        ]
+    ]
+}
