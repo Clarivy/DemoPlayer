@@ -20,7 +20,10 @@ def call_function(function_name: str, argument) -> VideoClip:
     video_function = getattr(functions, function_name)
     assert callable(
         video_function), "function_name must be a valid function name"
-    return video_function(argument)
+    if isinstance(argument, dict):
+        return video_function(**argument)
+    else:
+        return video_function(argument)
 
 
 def call_adjust(function_name: str, object, argument) -> VideoClip:
