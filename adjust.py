@@ -1,15 +1,26 @@
 from moviepy.video.fx.crop import crop as _crop
 from moviepy.editor import TextClip as _TextClip, \
     CompositeVideoClip as _CompositeVideoClip, \
-    VideoClip as _VideoClip
+    VideoClip as _VideoClip, \
+    ColorClip as _ColorClip, \
+    clips_array as _clips_array \
+
 
 
 def crop(video_clip: _VideoClip, coords: tuple[int, int, int, int]) -> _VideoClip:
-    print("Cropping video")
+    assert len(coords) == 4, "coords must be a tuple of 4 integers"
+    assert all([isinstance(coord, int) for coord in coords]
+               ), "coords must be a tuple of 4 integers"
+    assert coords[0] < coords[2], "coords[0] must be less than coords[2]"
+    assert coords[1] < coords[3], "coords[1] must be less than coords[3]"
+    assert all([coord >= 0 for coord in coords])
+    assert coords[2] <= video_clip.size[0], "coords[2] must be less than the width of the video"
+    assert coords[3] <= video_clip.size[1], "coords[3] must be less than the height of the video"
+
     return video_clip.crop(x1=coords[0], y1=coords[1], x2=coords[2], y2=coords[3])
 
 
-def _zoomVideo(video_clip: _VideoClip, zoom_factor: int, center: tuple[int, int] = None) -> _VideoClip:
+def _zoomVideo(video_clip: _VideoClip, zoom_factor: float, center: tuple[int, int] = None) -> _VideoClip:
     width, height = video_clip.size
     if center is None:
         center = (width // 2, height // 2)
@@ -33,7 +44,7 @@ def subclip(video_clip: _VideoClip, time_range: tuple[float, float]) -> _VideoCl
 
 
 def caption(video_clip: _VideoClip, caption_text: str) -> _VideoClip:
-    caption = _TextClip(
+    caption_clip = _TextClip(
         caption_text,
         fontsize=40,
         font='Arial',
@@ -45,12 +56,33 @@ def caption(video_clip: _VideoClip, caption_text: str) -> _VideoClip:
     )
 
     # Position the caption at the top center of the video with a small margin from the top
-    caption = caption.set_position(
+    caption_clip = caption_clip.set_position(
         ('center', 10)).set_duration(video_clip.duration)
 
     # Overlay the caption on the video
-    final_video = _CompositeVideoClip([video_clip, caption])
+    final_video = _CompositeVideoClip([video_clip, caption_clip])
     return final_video
+
+
+def title(video_clip: _VideoClip, title_text: str) -> _VideoClip:
+    title_clip = _TextClip(
+        title_text,
+        fontsize=80,
+        font='Arial',
+        color='white',
+        stroke_color='white',
+        stroke_width=2,
+        align='center',
+        interline=1,
+    )
+    black_background = _ColorClip(
+        (video_clip.size[0], title_clip.size[1]), col=(0, 0, 0))
+
+    # Overlay the TextClip on the ColorClip
+    caption_on_black = _CompositeVideoClip(
+        [black_background, title_clip.set_position('center')]).set_duration(video_clip.duration)
+
+    return _clips_array([[caption_on_black], [video_clip]])
 
 
 def mute(video_clip: _VideoClip, is_mute: bool) -> _VideoClip:
