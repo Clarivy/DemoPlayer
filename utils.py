@@ -37,6 +37,8 @@ def call_adjust(function_name: str, object, argument) -> VideoClip:
 
 
 def readVideoConfig(config: dict) -> VideoClip:
+    if isinstance(config, VideoClip):
+        return config
     assert isinstance(config, dict), "config must be a dictionary"
     assert "function" in config, "config must have a function key"
 
