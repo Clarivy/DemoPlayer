@@ -71,7 +71,7 @@ Here is another example:
 
 ```json
 {
-    "function": "makeGridView",
+    "function": "makeGrid2D",
     "argument": [
         [
             {
