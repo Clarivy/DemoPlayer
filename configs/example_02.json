@@ -1,0 +1,10 @@
+{
+    "function": "makeGrid1D",
+    "argument": {
+        "video_clips": {
+            "function": "readVideoFilePattern",
+            "argument": "../cond_demo/*test_sentence*.mp4"
+        },
+        "grid_size": [ 1, 5 ]
+    }
+}

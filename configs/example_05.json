@@ -1,0 +1,7 @@
+{
+    "function": "readVideoFile",
+    "argument": "../sample.mp4",
+    "adjust": {
+        "title": "Sample Video"
+    }
+}

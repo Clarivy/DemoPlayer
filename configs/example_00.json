@@ -1,5 +1,5 @@
 {
-    "function": "makeGridView",
+    "function": "makeGrid2D",
     "argument": [
         [
             {

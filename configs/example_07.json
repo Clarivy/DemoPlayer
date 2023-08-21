@@ -1,0 +1,29 @@
+{
+    "function": "makeColView",
+    "argument": [
+        {
+            "function": "readVideoFile",
+            "argument": "../voca/test_sentence.mp4",
+            "adjust": {
+                "caption": "Original: Faceformer + VOCA (Vertice using FLAME)"
+            }
+        },
+        {
+            "function": "readVideoFile",
+            "argument": "../Faceformer/bsvoca_lr_1e-4_tf_vert_latest_test_sentence.mp4",
+            "adjust": {
+                "caption": "Faceformer + VOCA (Blendshape)"
+            }
+        },
+        {
+            "function": "readVideoFile",
+            "argument": "../Faceformer/uscvoca_latest_test_sentence.mp4",
+            "adjust": {
+                "caption": "Faceformer + VOCA (Vertice using OurUV)"
+            }
+        }
+    ],
+    "adjust": {
+        "title": "Compare representations of VOCA"
+    }
+}

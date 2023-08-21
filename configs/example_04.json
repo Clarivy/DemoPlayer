@@ -1,0 +1,116 @@
+{
+    "function": "concatenate",
+    "argument": [
+        {
+            "function": "makeGrid2D",
+            "argument": [
+                [
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../voca/test_sentence.mp4",
+                        "adjust": {
+                            "caption": "Original: Faceformer + VOCA (Vertice)"
+                        }
+                    },
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/bscreamad_tf_lr1e-4_vert_latest_test_sentence.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + CREMA-D (Blendshape)"
+                        }
+                    },
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/cremad_vert_test_sentence.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + CREMA-D (Vertice)"
+                        }
+                    }
+                ],
+                [
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/uscvoca_latest_test_sentence.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + VOCA (Vertice using OurUV)"
+                        }
+                    },
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/bsmead_tf_lr1e-4_vert_latest_test_sentence.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + MEAD (Blendshape)"
+                        }
+                    },
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/mead_vert_test_sentence.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + MEAD (Vertice)"
+                        }
+                    }
+                ]
+            ],
+            "adjust": {
+                "subclip": [ 0, 4.99 ]
+            }
+        },
+        {
+            "function": "makeGrid2D",
+            "argument": [
+                [
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../voca/maggie5.mp4",
+                        "adjust": {
+                            "caption": "Original: Faceformer + VOCA (Vertice)"
+                        }
+                    },
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/bscreamad_tf_lr1e-4_vert_latest_maggie5.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + CREMA-D (Blendshape)"
+                        }
+                    },
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/cremad_vert_maggie5.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + CREMA-D (Vertice)"
+                        }
+                    }
+                ],
+                [
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/uscvoca_latest_maggie5.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + VOCA (Vertice using OurUV)"
+                        }
+                    },
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/bsmead_tf_lr1e-4_vert_latest_maggie5.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + MEAD (Blendshape)"
+                        }
+                    },
+                    {
+                        "function": "readVideoFile",
+                        "argument": "../Faceformer/mead_vert_maggie5.mp4",
+                        "adjust": {
+                            "caption": "Faceformer + MEAD (Vertice)"
+                        }
+                    }
+                ]
+            ],
+            "adjust": {
+                "subclip": [ 0, 4.95 ]
+            }
+        }
+    ],
+    "adjust": {
+        "title": "Compare different Dataset"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "function": "makeGrid1D",
+    "argument": {
+        "video_clips": {
+            "function": "readVideoFilePattern",
+            "argument": "../uncond_demo/*.mp4"
+        },
+        "grid_size": [3, 3]
+    },
+    "adjust": {
+        "title": "Unconditional in 9 different seeds"
+    }
+}
