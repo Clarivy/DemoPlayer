@@ -5,13 +5,23 @@ from moviepy.editor import VideoClip as _VideoClip, \
     ColorClip as _ColorClip
 
 from glob import glob as _glob
+import json
 
 
-def concatenate(video_clips: list[dict]) -> _VideoClip:
-    assert len(video_clips) > 0, "video_clips must have at least one clip"
+def _to_list(video_clips: [list[dict], dict]) -> _VideoClip:
+    from utils import readVideoConfig
+    result = []
+    if isinstance(video_clips, dict):
+        result = readVideoConfig(video_clips)
+    elif isinstance(video_clips, list):
+        result = list(map(readVideoConfig, video_clips))
+    assert isinstance(result, list)
+    assert len(result) > 0, "video_clips must have at least one clip"
+    return result
 
-    from utils import readVideoConfig as _readVideoConfig
-    video_clips = list(map(_readVideoConfig, video_clips))
+
+def concatenate(video_clips: [list[dict], dict]) -> _VideoClip:
+    video_clips = _to_list(video_clips)
 
     assert all([isinstance(clip, _VideoClip) for clip in video_clips]
                ), "video_clips must be a list of VideoClips"
@@ -19,11 +29,17 @@ def concatenate(video_clips: list[dict]) -> _VideoClip:
     return _concatenate_videoclips(video_clips)
 
 
-def makeColView(video_clips: list[dict]) -> _VideoClip:
-    assert len(video_clips) > 0, "video_clips must have at least one clip"
+# def zipLists(lists: list[list]) -> list[dict]:
+#     return zip(*lists)
 
-    from utils import readVideoConfig as _readVideoConfig
-    video_clips = list(map(_readVideoConfig, video_clips))
+
+# def mapList(function_name: str, list_config: list):
+#     from utils import call_function
+#     return [call_function(item) for item in list_config]
+
+
+def makeColView(video_clips: list[dict]) -> _VideoClip:
+    video_clips = _to_list(video_clips)
 
     max_duration = max([clip.duration for clip in video_clips])
     padded_clips = [_adjust_clip_duration(
@@ -41,9 +57,7 @@ def makeGrid2D(video_clips_2d: list[list[dict]]) -> _VideoClip:
     assert all([len(row) == len(video_clips_2d[0]) for row in video_clips_2d]
                ), "video_clips_2d must have the same number of columns in each row"
 
-    from utils import readVideoConfig as _readVideoConfig
-    video_clips_2d = [[_readVideoConfig(clip)
-                       for clip in row] for row in video_clips_2d]
+    video_clips_2d = [_to_list(row) for row in video_clips_2d]
     max_duration = max(
         [clip.duration for row in video_clips_2d for clip in row])
     padded_clips_2d = [[_adjust_clip_duration(
@@ -58,8 +72,7 @@ def makeGrid1D(*, video_clips, grid_size: tuple[int, int]) -> _VideoClip:
     assert len(video_clips) > 0, "video_clips must have at least one clip"
     assert grid_size[0] > 0 and grid_size[1] > 0, "grid_size must be positive"
 
-    from utils import readVideoConfig as _readVideoConfig
-    video_clips = _readVideoConfig(video_clips)
+    video_clips = _to_list(video_clips)
 
     assert len(video_clips) == grid_size[0] * \
         grid_size[1], f"video_clips({len(video_clips)}) must have the same number of clips as the grid size({grid_size[0] * grid_size[1]})"
@@ -88,6 +101,16 @@ def readVideoFile(video_file: str) -> _VideoClip:
     return _VideoFileClip(video_file, fps_source='fps')
 
 
+def useTemplate(*, variables: list[dict], config: dict) -> dict:
+    results = []
+    for variable in variables:
+        config_str = json.dumps(config)
+        for key, value in variable.items():
+            config_str = config_str.replace(f"${{{key}}}", value)
+        results.append(json.loads(config_str))
+    return _to_list(results)
+
+
 def readVideoFiles(video_files: list[str]) -> list[_VideoClip]:
     assert len(video_files) > 0, "video_files must have at least one file"
 
@@ -99,6 +122,7 @@ def readVideoFilePattern(video_file_pattern: str) -> _VideoClip:
                       str), "video_file_pattern must be a string"
 
     return readVideoFiles(_glob(video_file_pattern))
+
 
 def useBlackVideo(video_size: tuple[int, int], duration: float) -> _VideoClip:
     return _ColorClip(video_size, col=(0, 0, 0), duration=duration)

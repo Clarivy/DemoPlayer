@@ -1,0 +1,24 @@
+{
+    "function": "concatenate",
+    "argument": {
+        "video_clips": {
+            "function": "useTemplate",
+            "argument": {
+                "variables": [ { "audio": "test_sentence" }, { "audio": "maggie5" } ],
+                "config": {
+                    "function": "makeGrid1D",
+                    "argument": {
+                        "video_clips": {
+                            "function": "readVideoFilePattern",
+                            "argument": "../cond_demo/*${audio}*.mp4"
+                        },
+                        "grid_size": [ 1, 5 ]
+                    }
+                }
+            }
+        }
+    },
+    "adjust": {
+        "title": "Our Method in 5 different seeds"
+    }
+}

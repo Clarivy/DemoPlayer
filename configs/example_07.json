@@ -5,7 +5,7 @@
             "function": "readVideoFile",
             "argument": "../voca/test_sentence.mp4",
             "adjust": {
-                "caption": "Original: Faceformer + VOCA (Vertice using FLAME)"
+                "caption": "Original: Faceformer + VOCA (Vertices using FLAME)"
             }
         },
         {
@@ -19,7 +19,7 @@
             "function": "readVideoFile",
             "argument": "../Faceformer/uscvoca_latest_test_sentence.mp4",
             "adjust": {
-                "caption": "Faceformer + VOCA (Vertice using OurUV)"
+                "caption": "Faceformer + VOCA (Vertices using OurUV)"
             }
         }
     ],

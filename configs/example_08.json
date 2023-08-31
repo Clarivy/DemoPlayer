@@ -1,0 +1,65 @@
+{
+    "function": "concatenate",
+    "argument": [
+        {
+            "function": "makeColView",
+            "argument": [
+                {
+                    "function": "readVideoFile",
+                    "argument": "../voca/test_sentence.mp4",
+                    "adjust": {
+                        "caption": "Original: Faceformer + VOCA (FLAME)"
+                    }
+                },
+                {
+                    "function": "readVideoFile",
+                    "argument": "../pcavoca/pcavoca_lr_1e-4_tf_vert_latest_test_sentence.mp4",
+                    "adjust": {
+                        "caption": "Faceformer + VOCA (PCA)"
+                    }
+                }
+            ]
+        },
+        {
+            "function": "makeColView",
+            "argument": [
+                {
+                    "function": "readVideoFile",
+                    "argument": "../voca/maggie5.mp4",
+                    "adjust": {
+                        "caption": "Original: Faceformer + VOCA (FLAME)"
+                    }
+                },
+                {
+                    "function": "readVideoFile",
+                    "argument": "../pcavoca/pcavoca_lr_1e-4_tf_vert_latest_maggie5.mp4",
+                    "adjust": {
+                        "caption": "Faceformer + VOCA (PCA)"
+                    }
+                }
+            ]
+        },
+                {
+            "function": "makeColView",
+            "argument": [
+                {
+                    "function": "readVideoFile",
+                    "argument": "../voca/en_female.mp4",
+                    "adjust": {
+                        "caption": "Original: Faceformer + VOCA (FLAME)"
+                    }
+                },
+                {
+                    "function": "readVideoFile",
+                    "argument": "../pcavoca/pcavoca_lr_1e-4_tf_vert_latest_en_female.mp4",
+                    "adjust": {
+                        "caption": "Faceformer + VOCA (PCA)"
+                    }
+                }
+            ]
+        }
+    ],
+    "adjust": {
+        "title": "Compare between Vertices and PCA"
+    }
+}
